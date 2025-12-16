@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const RegisterUser = async function (req, res) {
     try {
-        let { name, age, email, password } = req.body;
+        let { name, age, email, password, createdAt } = req.body;
 
         // if use check
         let finduser = await UserModel.findOne({ email: email });
@@ -27,6 +27,7 @@ const RegisterUser = async function (req, res) {
                             age,
                             email,
                             password: hash,
+                            createdAt,
                         })
 
                         let token = generateToken(user);
@@ -51,4 +52,40 @@ const RegisterUser = async function (req, res) {
 
 }
 
-module.exports = { RegisterUser };
+const LoginUser = async function (req, res) {
+       try {
+        let { email, password } = req.body;
+
+        let finduserLogin = await UserModel.findOne({ email: email });
+        if (!finduserLogin) {
+            return res.status(401).json({
+                success: false,
+                message: "Email or Password is Invalid",
+            });
+        } else {
+            bcrypt.compare(password, finduserLogin.password, function (err, result) {
+                if (result) {
+                    let token = generateToken(finduserLogin);
+                    res.cookie('token', token);
+
+                    return res.status(201).json({
+                        success: true,
+                        message: "Login successfully",
+                        user: finduserLogin,
+                    });
+                } else {
+                    return res.status(401).json({
+                        success: false,
+                        message: "Email or Password is Invalid",
+                    });
+                }
+            });
+        }
+    }
+    catch (err) {
+        res.send(err.message);
+    }
+}
+
+
+module.exports = { RegisterUser, LoginUser };
