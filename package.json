@@ -1,0 +1,32 @@
+{
+  "name": "workout-tracker-project",
+  "version": "1.0.0",
+  "description": "this is workout tracker",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Usman8-dev/Workout-Tracker-Project-Node-js-.git"
+  },
+  "author": "Muhammad Usman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Usman8-dev/Workout-Tracker-Project-Node-js-/issues"
+  },
+  "homepage": "https://github.com/Usman8-dev/Workout-Tracker-Project-Node-js-#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "config": "^4.1.1",
+    "cookie-parser": "^1.4.7",
+    "crypto": "^1.0.1",
+    "debug": "^4.4.3",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.1"
+  }
+}
