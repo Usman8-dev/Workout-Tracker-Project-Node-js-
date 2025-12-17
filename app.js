@@ -11,12 +11,15 @@ const db = require('./Config/mongoose-connection');
 
 // routers 
 const userRouter = require('./Routers/userRouter')
+const workoutPlanRouter = require('./Routers/workoutPlan_Router')
 
 
 app.use(express.json());                    
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use('/user', userRouter);
+app.use('/workoutPlan', workoutPlanRouter);
 
 
 app.get('/', function(req, res) {
@@ -24,7 +27,6 @@ app.get('/', function(req, res) {
 })
 
 
-// app.listen(3000);
 app.listen(3000, ()=>{
     console.log('server is running');  
 });
