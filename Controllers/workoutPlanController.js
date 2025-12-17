@@ -24,4 +24,17 @@ const Create = async (req, res) => {
     }
 }
 
-module.exports = { Create }
+const showAllData = async (req, res) => {
+    try {
+        let findData = await WorkoutPlan.find({ CreatedBy: req.user.id });
+        return res.status(201).json({
+            success: true,
+            message: "Workout plan All Data",
+            data: findData,
+        });
+    } catch (err) {
+        res.send(err.message);
+    }
+}
+
+module.exports = { Create, showAllData }
