@@ -69,4 +69,24 @@ const Update = async (req, res) => {
     }
 }
 
-module.exports = { Create, showAllData, Update }
+const Delete = async (req, res) => {
+    try {
+        let findData = await WorkoutPlan.findByIdAndDelete(req.params.id);
+
+        if (!findData) {
+            return res.status(201).json({
+                success: true,
+                message: "Workout plan Not found",
+            });
+        }
+
+        return res.status(201).json({
+            success: true,
+            message: "Workout plan deleted successful",
+            data: findData,
+        });
+    } catch (err) {
+        res.send(err.message);
+    }
+}
+module.exports = { Create, showAllData, Update , Delete}
