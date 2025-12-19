@@ -10,7 +10,7 @@ const {validate} = require('../Middleware/validate');
 
 
 router.post('/:workoutPlanId/create/',IsLoginUser, Create);
-// router.put('/update/:id', IsLoginUser, Update);
+router.put('/update/:id', IsLoginUser, Update);
 router.get('/showAll', IsLoginUser,showAllData);
 // router.delete('/delete/:id', IsLoginUser, Delete);
 

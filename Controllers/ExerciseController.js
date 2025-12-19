@@ -38,4 +38,55 @@ const showAllData = async (req, res) => {
     }
 }
 
-module.exports = { Create, showAllData}
+const Update = async (req, res) => {
+    try {
+        let { name, category } = req.body;
+        let findData = await ExerciseModel.findById(req.params.id);
+
+        if (!findData) {
+            return res.status(201).json({
+                success: true,
+                message: "Exercise Not Found",
+            });
+        }
+
+        let updateData = await ExerciseModel.findOneAndUpdate({
+            _id: req.params.id,
+        }, {
+            name,
+            category,
+        }, {
+            new: true,
+        }
+        );
+        return res.status(201).json({
+            success: true,
+            message: "Exercise Updated successful",
+            data: updateData,
+        });
+    } catch (err) {
+        res.send(err.message);
+    }
+}
+
+// const Delete = async (req, res) => {
+//     try {
+//         let findData = await WorkoutPlan.findByIdAndDelete(req.params.id);
+
+//         if (!findData) {
+//             return res.status(201).json({
+//                 success: true,
+//                 message: "Workout plan Not found",
+//             });
+//         }
+
+//         return res.status(201).json({
+//             success: true,
+//             message: "Workout plan deleted successful",
+//             data: findData,
+//         });
+//     } catch (err) {
+//         res.send(err.message);
+//     }
+// }
+module.exports = { Create, showAllData, Update}
