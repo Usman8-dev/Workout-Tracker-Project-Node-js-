@@ -12,6 +12,7 @@ const db = require('./Config/mongoose-connection');
 // routers 
 const userRouter = require('./Routers/userRouter')
 const workoutPlanRouter = require('./Routers/workoutPlan_Router')
+const ExerciseRouter = require('./Routers/ExerciseRouter')
 
 
 app.use(express.json());                    
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.use('/user', userRouter);
 app.use('/workoutPlan', workoutPlanRouter);
+app.use('/exercise', ExerciseRouter);
 
 
 app.get('/', function(req, res) {
