@@ -3,11 +3,12 @@ const ExerciseModel = require('../Models/ExerciseModel')
 const Create = async (req, res) => {
 
     try {
-        let { name, category} = req.body;
+        let { name, category, reps, sets, weight} = req.body;
         const { workoutPlanId } = req.params;  // Get from route param
         let createExercise = await ExerciseModel.create({
             name,
             category,
+            reps, sets, weight,
             CreatedBy: req.user.id,
             workoutPlan_id: workoutPlanId,
         })
@@ -40,7 +41,7 @@ const showAllData = async (req, res) => {
 
 const Update = async (req, res) => {
     try {
-        let { name, category } = req.body;
+        let { name, category , reps, sets, weight} = req.body;
         let findData = await ExerciseModel.findById(req.params.id);
 
         if (!findData) {
@@ -55,6 +56,7 @@ const Update = async (req, res) => {
         }, {
             name,
             category,
+            reps, sets, weight,
         }, {
             new: true,
         }
@@ -69,24 +71,24 @@ const Update = async (req, res) => {
     }
 }
 
-// const Delete = async (req, res) => {
-//     try {
-//         let findData = await WorkoutPlan.findByIdAndDelete(req.params.id);
+const Delete = async (req, res) => {
+    try {
+        let findData = await ExerciseModel.findByIdAndDelete(req.params.id);
 
-//         if (!findData) {
-//             return res.status(201).json({
-//                 success: true,
-//                 message: "Workout plan Not found",
-//             });
-//         }
+        if (!findData) {
+            return res.status(201).json({
+                success: true,
+                message: "Workout plan Not found",
+            });
+        }
 
-//         return res.status(201).json({
-//             success: true,
-//             message: "Workout plan deleted successful",
-//             data: findData,
-//         });
-//     } catch (err) {
-//         res.send(err.message);
-//     }
-// }
-module.exports = { Create, showAllData, Update}
+        return res.status(201).json({
+            success: true,
+            message: "Exercise deleted successful",
+            data: findData,
+        });
+    } catch (err) {
+        res.send(err.message);
+    }
+}
+module.exports = { Create, showAllData, Update, Delete}

@@ -10,9 +10,12 @@ const exerciseSchema = new Schema({
     category: {
         type: String,
         required: true,
-        enum: ['Chest', 'Back', 'Shoulders', 'Arms', 'Legs', 'Core'], 
+        enum: ['Chest', 'Back', 'Shoulders', 'Arms', 'Legs', 'Core'],
         trim: true
     },
+    reps: Number,     
+    sets: Number, 
+    weight: String,
     CreatedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
