@@ -82,7 +82,7 @@ const Delete = async (req, res) => {
 
         return res.status(201).json({
             success: true,
-            message: "Workout plan deleted successful",
+            message: "Workout plan and all its exercises deleted successfully",
             data: findData,
         });
     } catch (err) {
